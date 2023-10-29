@@ -1,4 +1,4 @@
-package com.practices.mcsvc.course;
+package com.practices.msvc.course;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

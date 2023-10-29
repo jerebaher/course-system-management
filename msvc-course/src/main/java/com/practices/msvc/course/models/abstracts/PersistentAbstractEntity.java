@@ -1,4 +1,4 @@
-package com.practices.mcsvc.course;
+package com.practices.msvc.course.models.abstracts;
 
 import jakarta.persistence.*;
 
@@ -16,19 +16,19 @@ public abstract class PersistentAbstractEntity {
         this.deleted = Boolean.FALSE;
     }
 
-    protected Long getOid() {
+    public Long getOid() {
         return oid;
     }
 
-    protected void setOid(Long oid) {
+    public void setOid(Long oid) {
         this.oid = oid;
     }
 
-    protected Boolean getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    protected void setDeleted(Boolean deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 }

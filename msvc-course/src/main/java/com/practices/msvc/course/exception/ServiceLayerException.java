@@ -1,6 +1,6 @@
-package com.practices.msvc.user.exception;
+package com.practices.msvc.course.exception;
 
-import com.practices.msvc.user.message.ErrorMessages;
+import com.practices.msvc.course.message.ErrorMessages;
 
 public class ServiceLayerException extends Exception {
     public ServiceLayerException(String message) {
