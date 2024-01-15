@@ -1,5 +1,6 @@
 package com.practices.msvc.course.dao;
 
+import com.practices.msvc.course.models.dto.UserDto;
 import com.practices.msvc.course.models.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 

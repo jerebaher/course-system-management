@@ -19,6 +19,8 @@ public class CourseServiceImpl implements CourseService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseServiceImpl.class);
 
+    private static final String PREFIXED_MESSAGE_SERVICE = "Service error: ";
+
     private final CourseRepository courseRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository) {
@@ -33,7 +35,7 @@ public class CourseServiceImpl implements CourseService {
             return courseOpt.get();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            throw new ServiceLayerException(ErrorMessages.ERROR_GETTING_ENTITY);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
         }
     }
 
@@ -45,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
             return courseOpt.get();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            throw new ServiceLayerException(ErrorMessages.ERROR_GETTING_ENTITY);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
         }
     }
 
@@ -57,18 +59,31 @@ public class CourseServiceImpl implements CourseService {
             return courseOpt.get();
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            throw new ServiceLayerException(ErrorMessages.ERROR_GETTING_ENTITY);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
         }
     }
 
     @Override
     public List<Course> getAll() throws ServiceLayerException {
-        return this.courseRepository.getAll();
+        try {
+            return this.courseRepository.getAll();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
+        }
     }
 
     @Override
     public Course getByOid(Long oid) throws ServiceLayerException {
-        return this.courseRepository.getByOid(oid).orElse(null);
+        try {
+            Course course = this.courseRepository.getByOid(oid).orElse(null);
+            if (course == null) throw new ServiceLayerException("Service error: course do not exist.");
+
+            return course;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
+        }
     }
 
     @Override
@@ -94,7 +109,7 @@ public class CourseServiceImpl implements CourseService {
             this.courseRepository.save(course);
         } catch (Exception e){
             LOGGER.error(e.getMessage(), e);
-            throw new ServiceLayerException(ErrorMessages.ERROR_GETTING_ENTITY);
+            throw new ServiceLayerException(PREFIXED_MESSAGE_SERVICE + ErrorMessages.ERROR_GETTING_ENTITY);
         }
     }
 }

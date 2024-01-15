@@ -1,6 +1,7 @@
 package com.practices.msvc.course.repository.impl;
 
 import com.practices.msvc.course.dao.CourseDAO;
+import com.practices.msvc.course.models.dto.UserDto;
 import com.practices.msvc.course.models.entity.Course;
 import com.practices.msvc.course.repository.CourseRepository;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,21 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Transactional(readOnly = true)
     public Optional<Course> getByFinishDate(LocalDate finishDate) {
         return this.courseDAO.findCourseByFinishDate(finishDate);
+    }
+
+    @Override
+    public Optional<UserDto> assignUser(UserDto user, Long courseId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<UserDto> createUser(UserDto user, Long courseId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<UserDto> unassignUser(UserDto user, Long courseId) {
+        return Optional.empty();
     }
 
     @Override

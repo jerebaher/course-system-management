@@ -36,18 +36,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "/user/{oid}", produces = "application/json")
-    public ResponseEntity<Object> getUserByOid(@PathVariable Long oid){
-        try {
-            User user = this.userService.getByOid(oid);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (ServiceLayerException e) {
-            LOGGER.info(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping(path = "/user/byEmail", produces = "application/json")
+    @GetMapping(path = "/user", produces = "application/json")
     public ResponseEntity<Object> getByEmail(@RequestParam String email){
         try {
             User user = this.userService.getByEmail(email);
@@ -58,8 +47,8 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "/user/byId", produces = "application/json")
-    public ResponseEntity<Object> getByIdNumber(@RequestParam Long idNumber){
+    @GetMapping(path = "/user", produces = "application/json")
+    public ResponseEntity<Object> getByIdNumber(@RequestParam(name = "id") Long idNumber){
         try {
             User user = this.userService.getByIdNumber(idNumber);
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -69,7 +58,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "/user/byName/{name}", produces = "application/json")
+    @GetMapping(path = "/user/{name}", produces = "application/json")
     public ResponseEntity<Object> getByName(@PathVariable String name){
         try {
             List<User> userList = this.userService.getByName(name);
